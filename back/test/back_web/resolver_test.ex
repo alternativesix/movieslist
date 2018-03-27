@@ -78,5 +78,22 @@ defmodule Back.NoteResolverTest do
           }
         }
     end
+
+    test "find/2 with id returns movie", context do
+      {:ok, movie} = Movies.create_movie(@movie)
+
+      query = """
+      {
+        movie(id: #{movie.id}) {
+          id
+        }
+      }
+      """
+
+      res = context.conn
+        |> post("/graphiql", AbsintheHelpers.query_skeleton(query, "movies"))
+
+      assert json_response(res, 200)["data"]["movie"]["id"] == to_string(movie.id)
+    end
   end
 end

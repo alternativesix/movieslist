@@ -13,6 +13,11 @@ defmodule BackWeb.Schema do
     field :all_movies, non_null(list_of(non_null(:movie))) do
       resolve &BackWeb.MoviesResolver.all_movies/3
     end
+
+    field :movie, non_null(:movie) do
+      arg :id, non_null(:id)
+      resolve &BackWeb.MoviesResolver.find_movie/3
+    end
   end
 
   mutation do

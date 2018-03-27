@@ -6,6 +6,12 @@ defmodule BackWeb.MoviesResolver do
     {:ok, movies}
   end
 
+  def find_movie(_root, args, _info) do
+    %{ id: id } = args
+    movie = Movies.get_movie!(id)
+    {:ok, movie}
+  end
+
   def create_movie(_root, args, _info) do
     case Movies.create_movie(args) do
       {:ok, movie} -> {:ok, movie}
