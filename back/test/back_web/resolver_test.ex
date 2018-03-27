@@ -95,5 +95,28 @@ defmodule Back.NoteResolverTest do
 
       assert json_response(res, 200)["data"]["movie"]["id"] == to_string(movie.id)
     end
+
+    test "update/2 with valid params returns movie", context do
+      {:ok, movie} = Movies.create_movie(@movie)
+      query = """
+      mutation {
+        updateMovie(id: #{movie.id}, movie: { title: "new title", description: "new description" }) {
+          title,
+          description
+        }
+      }
+      """
+
+      res = context.conn
+        |> post("/graphiql", AbsintheHelpers.mutation_skeleton(query))
+
+      assert json_response(res, 200) == %{"data" =>
+        %{"updateMovie" => %{
+          "title" => "new title",
+          "description" =>"new description"
+          }
+          }
+        }
+    end
   end
 end

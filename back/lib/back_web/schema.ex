@@ -9,6 +9,11 @@ defmodule BackWeb.Schema do
     field :description, non_null(:string)
   end
 
+  input_object :movie_attributes do
+    field :title, non_null(:string)
+    field :description, non_null(:string)
+  end
+
   query do
     field :all_movies, non_null(list_of(non_null(:movie))) do
       resolve &BackWeb.MoviesResolver.all_movies/3
@@ -26,6 +31,13 @@ defmodule BackWeb.Schema do
       arg :description, non_null(:string)
 
       resolve &BackWeb.MoviesResolver.create_movie/3
+    end
+
+    field :update_movie, :movie do
+      arg :id, non_null(:id)
+      arg :movie, non_null(:movie_attributes)
+
+      resolve &BackWeb.MoviesResolver.update_movie/3
     end
   end
 end

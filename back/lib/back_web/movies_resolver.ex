@@ -12,6 +12,16 @@ defmodule BackWeb.MoviesResolver do
     {:ok, movie}
   end
 
+  def update_movie(_root, args, _info) do
+    %{id: id, movie: attributes} = args
+    movie = Movies.get_movie!(id)
+    case Movies.update_movie(movie, attributes) do
+      {:ok, movie} -> {:ok, movie}
+      _error ->
+        {:error, "could not update movie"}
+    end
+  end
+
   def create_movie(_root, args, _info) do
     case Movies.create_movie(args) do
       {:ok, movie} -> {:ok, movie}
