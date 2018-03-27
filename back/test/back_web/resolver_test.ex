@@ -118,5 +118,29 @@ defmodule Back.NoteResolverTest do
           }
         }
     end
+
+    test "delete/2 with valid params returns movie", context do
+      {:ok, movie} = Movies.create_movie(@movie)
+      query = """
+      mutation {
+        deleteMovie(id: #{movie.id}) {
+          title,
+          description
+        }
+      }
+      """
+
+      res = context.conn
+        |> post("/graphiql", AbsintheHelpers.mutation_skeleton(query))
+
+      assert_raise Ecto.NoResultsError, fn -> Movies.get_movie!(movie.id) end
+      assert json_response(res, 200) == %{"data" =>
+        %{"deleteMovie" => %{
+          "title" => movie.title,
+          "description" =>movie.description
+          }
+          }
+        }
+    end
   end
 end

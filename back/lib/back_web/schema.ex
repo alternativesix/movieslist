@@ -39,5 +39,11 @@ defmodule BackWeb.Schema do
 
       resolve &BackWeb.MoviesResolver.update_movie/3
     end
+
+    field :delete_movie, :movie do
+      arg :id, non_null(:id)
+
+      resolve &BackWeb.MoviesResolver.delete_movie/3
+    end
   end
 end

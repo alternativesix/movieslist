@@ -29,4 +29,14 @@ defmodule BackWeb.MoviesResolver do
         {:error, "could not create movie"}
     end
   end
+
+  def delete_movie(_root, args, _info) do
+    %{id: id} = args
+    movie = Movies.get_movie!(id)
+    case Movies.delete_movie(movie) do
+      {:ok, movie} -> {:ok, movie}
+      _error ->
+        {:error, "could not create movie"}
+    end
+  end
 end
