@@ -6,37 +6,32 @@ defmodule BackWeb.MoviesResolver do
     {:ok, movies}
   end
 
-  def find_movie(_root, args, _info) do
-    %{ id: id } = args
-    movie = Movies.get_movie!(id)
-    {:ok, movie}
+  def find_movie(_root, %{id: id}, _info) do
+    {:ok, fetch_movie(id)}
   end
 
   def update_movie(_root, args, _info) do
     %{id: id, movie: attributes} = args
-    movie = Movies.get_movie!(id)
-    case Movies.update_movie(movie, attributes) do
-      {:ok, movie} -> {:ok, movie}
-      _error ->
-        {:error, "could not update movie"}
-    end
+    process fn() -> id |> fetch_movie |> Movies.update_movie(attributes) end
   end
 
   def create_movie(_root, args, _info) do
-    case Movies.create_movie(args) do
+    process fn() -> Movies.create_movie(args) end
+  end
+
+  def delete_movie(_root, %{id: id}, _info) do
+    process fn() -> id |> fetch_movie |> Movies.delete_movie end
+  end
+
+  defp process(func) do
+    case func.() do
       {:ok, movie} -> {:ok, movie}
-      _error ->
-        {:error, "could not create movie"}
+      error ->
+        {:error, error}
     end
   end
 
-  def delete_movie(_root, args, _info) do
-    %{id: id} = args
-    movie = Movies.get_movie!(id)
-    case Movies.delete_movie(movie) do
-      {:ok, movie} -> {:ok, movie}
-      _error ->
-        {:error, "could not create movie"}
-    end
+  defp fetch_movie(id) do
+    Movies.get_movie!(id)
   end
 end
