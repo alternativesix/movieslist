@@ -35,5 +35,48 @@ defmodule Back.NoteResolverTest do
         }
       }
     end
+
+    test "createMovie with invalid data returns errors", context do
+      query = """
+      mutation {
+        createMovie(title: "new title") {
+          title,
+          description
+        }
+      }
+      """
+
+      res = context.conn
+        |> post("/graphiql", AbsintheHelpers.mutation_skeleton(query))
+
+      assert json_response(res, 400) == %{"errors" =>
+        [
+          %{"message" => "In argument \"description\": Expected type \"String!\", found null.",
+          "locations" => [%{"column" => 0, "line" => 2}]}
+        ]
+      }
+    end
+
+    test "createMovie with valid data returns movie", context do
+      query = """
+      mutation {
+        createMovie(title: "new title", description: "new description") {
+          title,
+          description
+        }
+      }
+      """
+
+      res = context.conn
+        |> post("/graphiql", AbsintheHelpers.mutation_skeleton(query))
+
+      assert json_response(res, 200) == %{"data" =>
+        %{"createMovie" => %{
+          "title" => "new title",
+          "description" =>"new description"
+          }
+          }
+        }
+    end
   end
 end

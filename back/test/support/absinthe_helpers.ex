@@ -6,4 +6,12 @@ defmodule Back.AbsintheHelpers do
       "variables" => "{}"
     }
   end
+
+  def mutation_skeleton(query) do
+    %{
+      "operationName" => "",
+      "query" => "#{query}",
+      "variables" => ""
+    }
+  end
 end

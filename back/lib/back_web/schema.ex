@@ -6,7 +6,7 @@ defmodule BackWeb.Schema do
   object :movie do
     field :id, non_null(:id)
     field :title, non_null(:string)
-    field :description, :string
+    field :description, non_null(:string)
   end
 
   query do
@@ -18,7 +18,7 @@ defmodule BackWeb.Schema do
   mutation do
     field :create_movie, :movie do
       arg :title, non_null(:string)
-      arg :description, :string
+      arg :description, non_null(:string)
 
       resolve &BackWeb.MoviesResolver.create_movie/3
     end
