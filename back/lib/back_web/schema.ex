@@ -3,7 +3,24 @@ defmodule BackWeb.Schema do
 
   alias BackWeb.News
 
+  object :movie do
+    field :id, non_null(:id)
+    field :title, non_null(:string)
+    field :description, :string
+  end
+
   query do
-    # this is the query entry point to our app
+    field :all_movies, non_null(list_of(non_null(:movie))) do
+      resolve &BackWeb.MoviesResolver.all_movies/3
+    end
+  end
+
+  mutation do
+    field :create_movie, :movie do
+      arg :title, non_null(:string)
+      arg :description, :string
+
+      resolve &BackWeb.MoviesResolver.create_movie/3
+    end
   end
 end
