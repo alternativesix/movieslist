@@ -5,8 +5,7 @@ defmodule BackWeb.Schema do
 
   object :movie do
     field :id, non_null(:id)
-    field :title, non_null(:string)
-    field :description, non_null(:string)
+    import_fields :movie_attributes
   end
 
   input_object :movie_attributes do
