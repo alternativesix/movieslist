@@ -2,7 +2,7 @@ import * as React from 'react';
 import Movie from './index';
 import { shallow } from 'enzyme';
 
-const getMovie = (props: any) => shallow(<Movie {...props} />);
+const getMovie = (props: Pick<Movie, 'title' | 'description'>) => shallow(<Movie {...props} />);
 
 describe('<Movie>', () => {
   it('renders ok', () => {
