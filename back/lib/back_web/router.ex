@@ -8,6 +8,9 @@ defmodule BackWeb.Router do
   scope "/" do
     pipe_through :api
 
+    forward "/graphql", Absinthe.Plug,
+      schema: BackWeb.Schema
+
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: BackWeb.Schema,
       interface: :simple,
