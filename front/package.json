@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/enzyme": "^3.1.9",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "apollo-client-preset": "^1.0.8",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
     "react": "^16.2.0",
+    "react-apollo": "^2.1.1",
     "react-dom": "^16.2.0",
-    "react-scripts-ts": "2.14.0"
+    "react-scripts-ts": "2.14.0",
+    "react-test-renderer": "^16.2.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -18,6 +27,12 @@
     "@types/node": "^9.6.0",
     "@types/react": "^16.1.0",
     "@types/react-dom": "^16.0.4",
+    "@types/react-test-renderer": "^16.0.1",
     "typescript": "^2.8.1"
+  },
+  "proxy": {
+    "/graphql": {
+      "target": "http://localhost:4000"
+    }
   }
 }
