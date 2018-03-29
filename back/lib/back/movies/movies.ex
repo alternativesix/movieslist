@@ -18,7 +18,9 @@ defmodule Back.Movies do
 
   """
   def list_movies do
-    Repo.all(Movie)
+    Movie
+      |> order_by(desc: :id)
+      |> Repo.all
   end
 
   @doc """
