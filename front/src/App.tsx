@@ -6,7 +6,7 @@ import withCreateMovie from '../src/components/Movies/GraphQL/mutations/withCrea
 
 class App extends React.Component {
 
-  CreateMovieForm = () => withCreateMovie()(MovieForm);
+  CreateMovieForm = () => withCreateMovie(MovieForm);
 
   render() {
     const { CreateMovieForm } = this;
