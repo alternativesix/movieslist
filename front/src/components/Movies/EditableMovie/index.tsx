@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Movie from '../Movie';
-import withUpdateMovie from '../GraphQL/wrappers/withUpdateMovie';
+import { withUpdateMovie } from '../GraphQL/wrapper';
 import MovieForm from '../MovieForm';
 import './styles.css';
 

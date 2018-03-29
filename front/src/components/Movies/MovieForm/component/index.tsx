@@ -9,7 +9,8 @@ type Props = {
   onDescriptionChange: (value: string) => void,
   error?: string,
   title?: string,
-  description?: string
+  description?: string,
+  loading: boolean
 };
 
 export default function MovieForm(
@@ -19,7 +20,8 @@ export default function MovieForm(
     onDescriptionChange,
     error,
     title,
-    description
+    description,
+    loading
   }: Props
   ) {
   return (
@@ -28,7 +30,7 @@ export default function MovieForm(
         <Input name="title" defaultValue={title} onChange={onTitleChange} />
         <Input name="description" defaultValue={description} onChange={onDescriptionChange} />
         {error && <div className="MovieForm-Errors">{error}</div>}
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" disabled={loading} />
       </form>
     </div>
    );

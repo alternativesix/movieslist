@@ -10,7 +10,8 @@ type Props = {
   saveMovie: (options: { variables: {} }) => void,
   error?: string,
   title?: string
-  description?: string
+  description?: string,
+  loading: boolean
 };
 
 export default class MovieFormContainer extends React.PureComponent<Props, StateType> {
@@ -31,12 +32,13 @@ export default class MovieFormContainer extends React.PureComponent<Props, State
 
   render() {
     const { updateField, onSubmit } = this;
-    const { error, title, description } = this.props;
+    const { error, title, description, loading } = this.props;
     return (
       <MovieForm
         onSubmit={onSubmit}
         error={error}
         title={title}
+        loading={loading}
         description={description}
         onTitleChange={updateField('title')}
         onDescriptionChange={updateField('description')}
