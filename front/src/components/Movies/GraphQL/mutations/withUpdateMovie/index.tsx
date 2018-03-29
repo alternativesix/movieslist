@@ -16,17 +16,19 @@ interface InjectedProps {
   error?: {};
 }
 
-export default function withUpdateMovie(movieId: React.ReactText) {
-  return <TOriginalProps extends {}>(Component: (React.ComponentType<TOriginalProps & InjectedProps>)) => (
+export default function withUpdateMovie() {
+  return <OriginalProps extends {}>(Component: (React.ComponentType<OriginalProps & InjectedProps>)) => {
+    return (props: Movie & { movieId: string | number}) => (
       <Mutation mutation={UPDATE_MOVIE}>
       {
         (updateMovie, { data, error }) => {
           const saveMovie = (options: { variables: OperationVariables }) => {
             const { variables } = options;
-            updateMovie({ variables: { ...variables, id: movieId } });
+            updateMovie({ variables: { ...variables, id: props.movieId } });
           };
-          return(<Component saveMovie={saveMovie} error={error && error.message} />);
+          return(<Component {...props} saveMovie={saveMovie} error={error && error.message} />);
         }}
       </Mutation>
     );
+  };
 }

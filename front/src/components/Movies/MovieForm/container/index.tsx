@@ -8,13 +8,15 @@ interface StateType {
 
 type Props = {
   saveMovie: (options: { variables: {} }) => void,
-  error?: string
+  error?: string,
+  title?: string
+  description?: string
 };
 
 export default class MovieFormContainer extends React.PureComponent<Props, StateType> {
   state = {
-    title: '',
-    description: ''
+    title: this.props.title || '',
+    description: this.props.description || ''
   };
 
   updateField = (fieldName: 'title' | 'description') =>
@@ -29,11 +31,13 @@ export default class MovieFormContainer extends React.PureComponent<Props, State
 
   render() {
     const { updateField, onSubmit } = this;
-    const { error } = this.props;
+    const { error, title, description } = this.props;
     return (
       <MovieForm
         onSubmit={onSubmit}
         error={error}
+        title={title}
+        description={description}
         onTitleChange={updateField('title')}
         onDescriptionChange={updateField('description')}
       />

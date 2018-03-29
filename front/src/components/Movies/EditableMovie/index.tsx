@@ -2,20 +2,15 @@ import * as React from 'react';
 import Movie from '../Movie';
 import withUpdateMovie from '../GraphQL/mutations/withUpdateMovie';
 import MovieForm from '../MovieForm';
+import './styles.css';
 
-export default class EditableMovie extends React.PureComponent<Movie> {
-  UpdateMovieForm = () => {
-    const { id } = this.props;
-    return withUpdateMovie(id)(MovieForm);
-  }
+const UpdateMovieForm = withUpdateMovie()(MovieForm);
 
-  render() {
-    const { UpdateMovieForm, props } = this;
-    return(
-      <div>
-        <Movie {...props} />
-        <UpdateMovieForm />
-      </div>
-    );
-  }
+export default function EditableMovie(props: Movie) {
+  return(
+    <div className="EditableMovie-Wrapper">
+      <Movie {...props} />
+      <UpdateMovieForm {...props} movieId={props.id}/>
+    </div>
+  );
 }
