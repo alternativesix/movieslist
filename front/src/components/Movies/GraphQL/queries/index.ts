@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const CREATE_MOVIE = gql`
-  mutation createMovie($id: String!, $title: String!, $description: String!) {
-    createMovie(id: $id, movie: { title: $title, description: $description }) {
+  mutation createMovie($title: String!, $description: String!) {
+    createMovie(title: $title, description: $description) {
       id
       title
     }

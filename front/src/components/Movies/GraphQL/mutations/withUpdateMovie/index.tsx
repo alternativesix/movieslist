@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Mutation, OperationVariables } from 'react-apollo';
-import { UPDATE_MOVIE } from '../../queries';
+import { UPDATE_MOVIE, GET_MOVIES } from '../../queries';
 
 interface InjectedProps {
   saveMovie: (options: { variables: OperationVariables }) => void;
@@ -14,7 +14,7 @@ const withUpdateMovie = <OriginalProps extends {}>(Component: (React.ComponentTy
       (updateMovie, { data, error }) => {
         const saveMovie = (options: { variables: OperationVariables }) => {
           const { variables } = options;
-          updateMovie({ variables: { ...variables, id: props.movieId }});
+          updateMovie({ variables: { ...variables, id: props.movieId }, refetchQueries: [ { query: GET_MOVIES }] });
         };
         return(<Component {...props} saveMovie={saveMovie} error={error && error.message} />);
       }}
