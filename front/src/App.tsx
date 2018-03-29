@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 import MoviesList from './components/Movies/MoviesList';
 import MovieForm from './components/Movies/MovieForm/container';
-import withCreateMovie from '../src/components/Movies/GraphQL/mutations/withCreateMovie';
+import withCreateMovie from '../src/components/Movies/GraphQL/wrappers/withCreateMovie';
 
 class App extends React.Component {
 
