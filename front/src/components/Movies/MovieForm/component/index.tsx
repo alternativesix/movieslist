@@ -7,10 +7,7 @@ type Props = {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
   onTitleChange: (value: string) => void,
   onDescriptionChange: (value: string) => void,
-  errors?: {
-    title?: string,
-    description?: string
-  }
+  error?: string
 };
 
 export default function MovieForm(
@@ -18,14 +15,15 @@ export default function MovieForm(
     onSubmit,
     onTitleChange,
     onDescriptionChange,
-    errors
+    error
   }: Props
   ) {
   return (
     <div className="MovieForm">
       <form onSubmit={onSubmit}>
-        <Input name="title" onChange={onTitleChange} error={errors && errors.title} />
-        <Input name="description" onChange={onDescriptionChange} error={errors && errors.description} />
+        <Input name="title" onChange={onTitleChange} />
+        <Input name="description" onChange={onDescriptionChange} />
+        {error && <div className="MovieForm-Errors">{error}</div>}
         <input type="submit" value="Submit" />
       </form>
     </div>

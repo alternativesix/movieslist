@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import MoviesList from './components/Movies/MoviesList';
-import MovieForm from './components/Movies/MovieForm';
+import MovieForm from './components/Movies/MovieForm/container';
 
 class App extends React.Component {
   render() {
