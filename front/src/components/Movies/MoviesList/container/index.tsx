@@ -1,18 +1,8 @@
 import * as React from 'react';
 import MoviesList from '../component';
-
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
-const GET_MOVIES = gql`
-  {
-    allMovies {
-      id
-      title
-      description
-    }
-  }
-`;
+import { GET_MOVIES } from '../../GraphQL/queries';
 
 export default function MoviesListContainer() {
   return(
