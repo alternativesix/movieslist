@@ -1,7 +1,7 @@
 defmodule BackWeb.Schema do
   use Absinthe.Schema
 
-  alias BackWeb.News
+  alias BackWeb.Movies
 
   object :movie do
     field :id, non_null(:id)

@@ -26,8 +26,8 @@ defmodule BackWeb.MoviesResolver do
   defp process(func) do
     case func.() do
       {:ok, movie} -> {:ok, movie}
-      error ->
-        {:error, error}
+      {:error, _changeset} ->
+        {:error, "cannot save movie"}
     end
   end
 
