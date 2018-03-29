@@ -18,13 +18,11 @@ interface InjectedProps {
 
 export default function withCreateMovie() {
   return <TOriginalProps extends {}>(Component: (React.ComponentType<TOriginalProps & InjectedProps>)) => (
-      () => (
-        <Mutation mutation={CREATE_MOVIE}>
-        {
-          (createMovie, { data, error }) => (
-            <Component saveMovie={createMovie} error={error && error.message} />
-          )}
-        </Mutation>
-      )
+      <Mutation mutation={CREATE_MOVIE}>
+      {
+        (createMovie, { data, error }) => (
+          <Component saveMovie={createMovie} error={error && error.message} />
+        )}
+      </Mutation>
     );
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Movie from '../../Movie';
+import EditableMovie from '../../EditableMovie';
 
 import './styles.css';
 
@@ -16,7 +16,7 @@ export default function MoviesList({ movies, loading, error }: Props) {
     <div className="MoviesList"> {
       movies.map(movie =>
         <div className="MoviesList-Wrapper" key={movie.id}>
-          <Movie title={movie.title} description={movie.description} />
+          <EditableMovie {...movie} />
         </div>
           )
       }

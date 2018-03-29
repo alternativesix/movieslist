@@ -1,6 +1,5 @@
 import * as React from 'react';
 import MovieForm from '../component';
-import withCreateMovie from '../../GraphQL/mutations/CreateMovie';
 
 interface StateType {
   title: string;
@@ -12,7 +11,7 @@ type Props = {
   error?: string
 };
 
-class MovieFormContainer extends React.PureComponent<Props, StateType> {
+export default class MovieFormContainer extends React.PureComponent<Props, StateType> {
   state = {
     title: '',
     description: ''
@@ -41,5 +40,3 @@ class MovieFormContainer extends React.PureComponent<Props, StateType> {
     );
   }
 }
-
-export default withCreateMovie()(MovieFormContainer);
