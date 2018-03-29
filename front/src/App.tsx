@@ -12,6 +12,7 @@ class App extends React.Component {
       <div className="App">
         <div className="Wrapper">
           <MoviesList />
+          <div>Add new movie: </div>
           <CreateMovieForm />
         </div>
       </div>
