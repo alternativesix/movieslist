@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Mutation, OperationVariables } from 'react-apollo';
-import { GET_MOVIES, CREATE_MOVIE, UPDATE_MOVIE } from '../queries';
+import { GET_MOVIES, CREATE_MOVIE, UPDATE_MOVIE, DELETE_MOVIE } from '../queries';
 
 interface InjectedProps {
   saveMovie: (options: { variables: OperationVariables }) => void;
@@ -19,6 +19,7 @@ function withMutation(mutation: any) {
               const { movieId } = props;
               if (!movieId) {
                 saveMovie({ variables: { ...variables }, refetchQueries: [ { query: GET_MOVIES }] });
+                return;
               }
               saveMovie({ variables: { ...variables, id: movieId }, refetchQueries: [ { query: GET_MOVIES }] });
             };
@@ -32,3 +33,4 @@ function withMutation(mutation: any) {
 
 export const withCreateMovie = withMutation(CREATE_MOVIE);
 export const withUpdateMovie = withMutation(UPDATE_MOVIE);
+export const withDeleteMovie = withMutation(DELETE_MOVIE);

@@ -18,6 +18,15 @@ export const UPDATE_MOVIE = gql`
   }
 `;
 
+export const DELETE_MOVIE = gql`
+  mutation deleteMovie($id: String!) {
+    deleteMovie(id: $id) {
+      id
+      title
+    }
+  }
+`;
+
 export const GET_MOVIES = gql`
   {
     allMovies {
